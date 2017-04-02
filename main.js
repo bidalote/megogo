@@ -1376,7 +1376,7 @@ function show_waiting(waiting_time){
         arr[0].removeChild(arr[0].children[0]);
     var obj = document.createElement('div');
     obj.className = 'modal_login';
-    obj.innerHTML = "Loading data...";
+    obj.innerHTML = lang_loading_message;
     document.getElementsByClassName('modal_box')[0].appendChild(obj);
     document.getElementsByClassName('modal')[0].style.display = 'block';
     document.getElementsByClassName('modal_box')[0].style.display = 'block';
