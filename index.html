@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Untitled Document</title>
+        <script type="text/javascript"  src="sys.js"></script>
+        <script type="text/javascript" src="vars.js"></script>   
+        <script type="text/javascript"  src="lst.js"></script>
+        <script type="text/javascript" src="md5.js"></script>
+        <script type="text/javascript"  src="keyhandlers.js"></script>
+        <script type="text/javascript"  src="main.js"></script>
+        <script type="text/javascript"  src="player.js"></script>
+        <script type="text/javascript"  src="stb.js"></script> 
+        <script type="text/javascript"> stb_emul_mode = 1; var stb = gSTB;</script>
+    </head>
+
+    <body  onload="init()" onkeydown="body_keydown(event)" >
+        <div id="body" style="display:none" >
+
+            <!-- MODAL WINDOW -->
+            <div class="modal" style="display: none;" id="main_auth_modal_box">
+                <div class="modal_box">
+                    <div class="modal_text" id="modal_auth_info1">modal_auth_info1</div>
+                    <div><div class="modal_login" id="modal_login1">modal_login1</div><input type="text" id="name" name="name" /></div>
+                    <div><div class="modal_pass" id="modal_pass1">modal_pass1</div><input type="text" id="name" name="name" /></div>
+                    <div class="modal_btn"><input id="modal_accept_button1" type="button" value="ok" /></div>
+                    <div class="modal_btn"><input id="modal_cancel_button1" type="button" value="cancel" /></div>
+                </div>
+            </div>
+
+
+            <div class="modal" style="display: none;" id = "confirmExit">
+                <div class="modal_box">
+                    <div class="modal_btn" ><input id="conf_ok" type="button" value="ПОДТВЕРДИТЬ" /></div>
+                    <div class="modal_btn" ><input id="conf_cancel" type="button" value="ОТМЕНА" /></div>
+                </div>
+            </div>
+            <!-- END MODAL WINDOW -->
+
+
+
+            <div id="search_layer" class="search_list" style="display: none;">
+                <div class="modal_hr"></div>
+                <div class="close_btn"><input type="button" class="genrebtn" id="search_button_close" value="" onclick="exit_modal()"/></div>
+            </div>
+
+
+             <div id="cats_page" class="container" >
+                <div class="menu">
+                    <div class="menu_stripes">
+                        <div class="logo"></div>
+                        <div id="main_menu_item_list">
+                            <!-- <div id="cat_0" title="topmenu" class="cat_item_text menu_item_blue_act">рекомендуем</div>
+                                 <div id="cat_1" title="topmenu" class="cat_item_text menu_item_violet">фильмы</div>
+                                 <div id="cat_2" title="topmenu" class="cat_item_text menu_item_green">сериалы</div>
+                                 <div id="cat_3" title="topmenu" class="cat_item_text menu_item_orange">мультфильмы</div>
+                                 <div id="cat_4" title="topmenu" class="cat_item_text menu_item_red">Передачи и шоу</div>
+                                 <div id="cat_5" title="topmenu" class="cat_item_text menu_item_blue">Избранное</div> -->
+                        </div>
+                        <div class="menu_separator"></div>
+                        <div id="cat_searh" title="topmenu" class="menu_item_special"><div class="cat_item_text menu_search"></div><span id="lang_search_main_menu">-поиск</span></div>
+                        <div id="cat_service" title="topmenu" class="menu_item_special"><div class="cat_item_text menu_settings"></div><span id="lang_service_main_menu">-настройки</span></div> 
+                    </div>
+                </div>
+
+                <div class="submenu_genres" id = "submenu_genres" style="display:none;">
+                    <div class="submenugenres_shadow_top"></div>
+                    <div class="submenugenres_shadow_bottom"></div>
+                    <div class="submenu_shadow_left0"></div>
+                    <div class="submenugenres_shadow_right"></div>
+                    <div class="submenu_stripe0" id="genres_id"><div class="submenu_genres_item"></div></div>
+                </div>
+
+
+                <div class="sub_submenu_genres" id = "sub_submenu_genres" style="display:none;">
+                    <div class="submenugenres_shadow_top"></div>
+                    <div class="submenugenres_shadow_bottom"></div>
+                    <div class="submenu_shadow_left0"></div>
+                    <div class="submenugenres_shadow_right"></div>
+                    <div class="submenu_stripe0" id="sub_genres_id">
+                        <div class="submenu_genres_item">
+                        </div>
+                        <div class="submenu_genres_item">
+                            <div class="submenugenres_title">СЕЗОН 1</div>
+                        </div>
+                    </div>
+                </div>            
+
+
+
+                <!-- RECOMMENDED FILMS submenu  -->
+                <div class="submenu" id="submenu">
+                    <div class="submenu_shadow_top"></div>
+                    <div class="submenu_shadow_bottom"></div>
+                    <div class="submenu_shadow_left" ></div>
+                    <div class="submenu_shadow_right"></div>
+                    <div class="submenu_stripe" id="video_layer"></div>
+                </div>
+
+            </div>
+            <!-- END MAIN MENU PAGE -->
+
+
+            <!-- MOVIE INFO -->
+            <div class="container" id="info_page" style="display: none;">
+
+                <div class="movieinfo_back_blue"></div>
+                <div class="movieinfo_menu">
+                    <div class="movieinfo_menuitem_blue" id="info_0">-смотреть фильм</div>
+                    <div class="movieinfo_menuitem" id="info_1">-актеры</div>
+                    <div class="movieinfo_menuitem" id="info_2">-похожие фильмы</div>
+                    <div class="movieinfo_menuitem" id="info_3">-в избранное</div>
+                    <div class="movieinfo_menuitem" id="info_4">-отзывы</div>
+                    <div class="movieinfo_menuitem" id="info_5">-оценить фильм</div>
+                    <div class="movieinfo_menuitem" id="info_6">-Выбрать качество</div>
+                </div>
+
+                <div class="movieinfo_container" id="movieinfo_general_id">
+                   <!-- <div class="movieinfo_menuitem_shadow"></div> -->
+                    <div class="movieinfo_gradient_top"><div class="arrow_top_blue" style="display:none;" id="descr_scr_arrow_top"></div></div>
+                    <div class="movieinfo_gradient_bottom"><div class="arrow_bottom_blue" style="display:none;" id="descr_scr_arrow_bottom"></div></div>
+                    <div id="descr_scrolling_div" style="position: relative; top:0px;">
+                        <div class="movieinfo_poster"><img id="movie_info_poster" /></div>
+                        <div class="movieinfo_title" id="info_title"></div>
+                        <div class="movieinfo_rating_and_budget"></div>
+                        <div class="movieinfo_block" id="movieinfo_block"><span class="movieinfo_time"></span></div>
+                        
+                        <div class="movieinfo_cast" id = "director_id">-Режиссер :<div class="movieinfo_cast_actor"></div></div>
+                        <div class="movieinfo_cast" id="lang_genre">-Жанр: <div class="movieinfo_cast_actor" id="movie_info_genre_id"></div></div>
+                        <div class="movieinfo_cast" id="lang_rating">-Рейтинг: <div class="movieinfo_cast_rating" id="movieinfo_cast_rating"></div></div>
+                        <div class="movieinfo_cast" id="movie_info_actor_id"><div class="movieinfo_cast_actor" ></div></div>
+                        <div id="descr"></div>
+                    </div>
+                </div>
+
+                <div class="movieinfo_container" id="movieinfo_actors_id" style="display: none;">
+                    <div class="movieinfo_menuitem_shadow"></div>
+                    <div class="movieinfo_gradient_top"><div class="arrow_top_blue" style="display:none;" id="actors_scr_arrow_top"></div></div>
+                    <div class="movieinfo_gradient_bottom"><div class="arrow_bottom_blue" style="display:none;" id="actors_scr_arrow_bottom"></div></div>
+                    <div id="actors_scrolling_div" style="position: relative; top:0px;"></div>
+                </div>
+
+                <div class="movieinfo_container" id="movieinfo_comments_id" style="display: none;">
+                    <div class="movieinfo_menuitem_shadow"></div>
+                    <div class="movieinfo_gradient_top"><div class="arrow_top_blue"  style="display:none;" id="comments_scr_arrow_top"></div></div>
+                    <div class="movieinfo_gradient_bottom"><div class="arrow_bottom_blue"  style="display:none;" id="comments_scr_arrow_bottom"></div></div>
+                    <div id="comments_scrolling_div" style="position: relative; top:0px;"></div>
+                </div>
+
+                <div class="submenu0" id="alt_submenu">
+                    <div class="submenu_shadow_top0" ></div>
+                    <div class="submenu_shadow_bottom0"></div>
+                    <div class="submenu_shadow_left0"></div>
+                    <div class="submenu_shadow_right0"></div>
+
+                    <div class="submenu_stripe0" id="alt_video_layer"></div>
+                </div>
+
+                <div class="movieinfo_submenu" id ="movieinfo_submenu">
+                    <div class="movieinfo_menuitem" id="lang_like">-Не понравилось</div>
+                    <div class="movieinfo_menuitem" id="lang_dont_like">-Понравилось</div>
+                </div>
+                
+                <div class="movieinfo_submenu_quality" id ="movieinfo_quality" style="display: none">
+                    <div class="submenuseries_shadow_top"></div>
+                    <div class="submenuseries_shadow_bottom"></div>
+                    <div class="submenuseries_shadow_right"></div>
+                    <div class="movieinfo_menuitem" id="movieinfo_quality_id"></div>
+                </div>
+                
+            </div>
+            <!-- END MOVIE INFO -->
+
+
+            <!-- PLAYER PAGE -->
+            <div id="player_page"  style="display:none; position: absolute;">
+                <div id="head">
+                    <div id="video_title"></div>
+                </div>
+                <div id="player" class="player">
+                    <div id="setTime">
+                        <div ></div>
+                    </div>
+                    <div id="player_btns">
+                        <div id="btn_bwd"></div>
+                        <div id="btn_play"></div>
+                        <div id="btn_fwd"></div>
+                    </div>
+                    <div id="playtime" style="float: right;">
+                        <span id="cur_time"></span>&nbsp;/&nbsp;<span id="total_time"></span>
+                    </div>
+                    <div id="progressbar">
+                        <div id="progress"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="mute" style="display:none;"></div>
+            <div id="playingStatus" style="display:none;"></div>
+            <div id="volumeForm" style="display:none;">
+                <div id="volume_bar"><div id="volume_right"></div></div>
+                <div id="volume_num">100%</div>
+            </div>
+            <div id="screenAspect"></div>
+            <div id="playAndPause"  style="display:none; position: absolute;"></div>
+            <div id="player_page" style="display:none; position: absolute;">
+                <div id="head">
+                    <div id="video_title"></div>
+                </div>
+                <div id="player">
+                    <div id="setTime">
+                        <div class="btn_red" id="lang_player_hide">-Скрыть</div>
+                    </div>
+                    <div id="player_btns">
+                        <div id="btn_bwd"></div>
+                        <div id="btn_play"></div>
+                        <div id="btn_fwd"></div>
+                    </div>
+                    <div id="playtime" style="float: right;">
+                        <span id="cur_time"></span>&nbsp;/&nbsp;<span id="total_time"></span>
+                    </div>
+                    <div id="progressbar">
+                        <div id="progress"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="mute" style="display:none;"></div>
+            <div id="playingStatus" style="display:none;"></div>
+            <div id="volumeForm" style="display:none;">
+                <div id="volume_bar"><div id="volume_right"></div></div>
+                <div id="volume_num">100%</div>
+            </div>
+            <div id="screenAspect"></div>
+            <!-- END PLAYER PAGE -->
+
+
+
+            <!-- MAIN MENU -->
+            <div class="container" id="menu_series" style="display:none;">
+                <div class="menu_series" >
+                    <div class="menustripes_series">
+                        <div class="logo"></div>
+                        <div class="menuseries_item_act" id="series_0"><div class="menu_continue" ></div>-продолжить</div>
+                        <div class="menuseries_item" id="series_1"><div class="menu_season" ></div>-сезон 12, серия 24</div>
+                        <div class="menuseries_item" id="series_2"><div class="menu_quality" ></div>-выбор качества</div>
+                        <div class="menuseries_item" id="series_3"><div class="menu_anew" ></div>-смотреть сначала</div>
+                        <div class="menuseries_separator" id="series_4"></div>
+                    </div>
+                </div>
+                <div class="submenu_series" id = "submenu_series" style="display:none;">
+                    <div class="submenuseries_shadow_top"></div>
+                    <div class="submenuseries_shadow_bottom"></div>
+                  
+                    <div class="submenuseries_shadow_right"></div>
+                    <div class="submenu_stripe0" id="season_id">
+                        <div class="submenu_series_item">
+                        </div>
+                        <div class="submenu_series_item">
+                            <div class="submenuseries_title">-СЕЗОН 1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="submenu_series2" id = "submenu_series2" style="display:none;">
+                    <div class="submenuseries_shadow_top"></div>
+                    <div class="submenuseries_shadow_bottom"></div>
+                    <div class="submenuseries_shadow_right"></div>
+                    <div class="submenu_stripe0" id="series_id">
+                        <div class="submenu_series_item">
+                        </div>
+                        <div class="submenu_series_item">
+                            <div class="submenuseries_title">-СЕРИЯ 1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submenu_series" id = "submenu_bitrates" style="display:none;">
+                    <div class="submenuseries_shadow_top"></div>
+                    <div class="submenuseries_shadow_bottom"></div>
+                    <div class="submenuseries_shadow_right"></div>
+                    <div class="submenu_stripe0" id="bitrates_id">
+                        <div class="submenu_series_item">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN MENU -->
+
+
+
+            <div class="stripes_container" id="extsubmenu" style="display:none;">
+                <div class="stripes_horizontal" id="ext_video_layer_0">
+                </div>
+                <div class="stripes_horizontal_act" id="ext_video_layer">
+                    <div class="stripehorizontal_counter">
+                        <div class="stripehorizontal_counter_bottom"></div>
+                    </div>
+                    <div class="stripeshorizontal_left"></div>
+                    <div class="stripeshorizontal_right"></div>
+                </div>
+                <div class="stripes_horizontal" id="ext_video_layer_2">
+                </div>
+            </div>
+
+
+
+
+            <!-- modal search line -->
+            <div class="modal1" id="modal_search1"  style="display:none;">
+                <div class="modal_box1" id="search_modal_box">
+                    
+                    <!-- suggests div -->
+                    <div class="suggest_box" id="suggest_box" style='display:none;'>
+                        <div id="suggest_4" class="suggest_item" style="display: none; ">one
+                        </div>
+                        <div id="suggest_3" class="suggest_item" style="display: none; ">two
+                        </div>  
+                        <div id="suggest_2" class="suggest_item" style="display: none; ">three
+                        </div>
+                        <div id="suggest_1" class="suggest_item" style="display: none; ">four
+                        </div>
+                        <div id="suggest_0" class="suggest_item" style="display: none; ">five
+                        </div>
+                    </div>
+                    <!-- end od suggests -->
+                        
+                    <div>
+                        <div class="modal_login1" id="lang_searching">-Искать:</div><input type="text" id="search_line" name="name" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="search_container" id="modal_search" style="display:none;">
+                <div class="stripes_horizontal_act">
+                    <div class="stripeshorizontal_left"></div>
+                    <div class="stripeshorizontal_right"></div>
+                </div>
+            </div>
+
+
+
+
+            <!-- service menu realization -->
+            <div class="submenu_series" id = "submenu_settings" style="display:none;">
+                <div class="submenuseries_shadow_top"></div>
+                <div class="submenuseries_shadow_bottom"></div>
+                <div class="submenu_shadow_left0"></div>
+                <div class="submenuseries_shadow_right"></div>
+                <div class="submenu_stripe0" id="settings_id">
+                    <div class="submenu_series_item">
+                    </div>
+                    <div class="submenu_series_item" id = "settings_item_0">
+                        <div class="submenuseries_title" id="lang_serv_menu1">Учетная запись</div>
+                    </div>
+                    <div class="submenu_series_item" id = "settings_item_1">
+                        <div class="submenuseries_title" id="lang_serv_menu2">Защита от детей</div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END STRIPES MENU -->
+
+        
+            <div class="footer" id = "footer">
+                <div class="footer_exit" id="lang_footer_exit">-Exit</div>
+                <div class="footer_return" id="lang_footer_return" style="display:none;">-Return</div>
+                <div class="footer_keyboard" id="lang_footer_keyboard" style="display:none;">-Keyboard</div>
+                <div id = "footer_page" style="display:none;">
+                    <div class="footer_pagedown" id="lang_footer_pagedown">-PgDown</div>
+                    <div class="footer_pageup" id="lang_footer_pageup">-PgUp</div>
+                </div>
+                    
+                <div id = "footer_sort" style="display:none;">
+                    <div class="footer_red" id="sort_year">по году</div>
+                    <div class="footer_green" id="sort_popular">популярные</div>
+                    <div class="footer_yellow" id="sort_rating">по рейтингу</div>
+                    <div class="footer_blue" id="sort_new">новые</div>
+                        
+                </div>
+            </div>
+                
+        </div>
+    </body>
+</html>

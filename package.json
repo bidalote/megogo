@@ -1,0 +1,33 @@
+{
+  "name": "MEGOGO",
+  "date": "2017.03.28",
+  "version": "2.0.1",
+  "description": "MEGOGO is an online cinema with video content that has a total duration of 20 hours. A large part of the MEGOGO collection is available to users free of charge.",
+  "author": {
+    "name": "Bidalote"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bidalote/megogo.git"
+  },
+  "config": {
+    "type": "app",
+    "category": "apps",
+    "backgroundColor": "#171717",
+    "name": "MEGOGO",
+    "legacy": true,
+    "description": "MEGOGO is an online cinema with video content that has a total duration of 20 hours. A large part of the MEGOGO collection is available to users free of charge.",
+    "icons": {
+      "paths": {
+        "480": "img/480/",
+        "576": "img/576/",
+        "720": "img/720/",
+        "1080": "img/1080/"
+      },
+      "states": {
+        "normal": "normal.png",
+        "active": "active.png"
+      }
+    }
+  }
+}
